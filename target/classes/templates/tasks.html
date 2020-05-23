@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>Taskmanager</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body class="container">
+<nav class="navbar navbar-light bg-light">
+    <a class="navbar-brand" href="/">Taskmanager</a>
+    <ul class="nav navbar">
+        <li class="nav-item active"><a class="nav-link" href="/tasks">Tasks</a></li>
+        <li class="nav-item"><a class="nav-link" href="/tasks/new">New task</a></li>
+    </ul>
+</nav>
+<h1>Tasks</h1>
+<a class="btn btn-success" href="/tasks/new" role="button">New Task</a>
+<div th:switch="${tasks.size()}">
+    <p th:case="0">No tasks left to do.</p>
+    <table class="table" th:case="*">
+        <thead>
+        <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Date</th>
+            <th scope="col">Details</th>
+            <th scope="col">Edit</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="task : ${tasks}">
+            <td class="mr-2" th:text="${task.title}"></td>
+            <td th:text="'due ' + ${task.getFormattedDate()}"></td>
+            <td><a class="btn btn-primary" th:href="'/tasks/' + ${task.id}" role="button">Details</a></td>
+            <td><a class="btn btn-warning" th:href="'/tasks/edit/' + ${task.id}" role="button">Edit</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
