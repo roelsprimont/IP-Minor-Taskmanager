@@ -60,7 +60,15 @@ public class TaskServiceImpl implements TaskService {
         subTaskRepository.save(subTask);
     }
 
+    @Override
+    public void deleteTask(TaskDTO taskDTO) {
+        taskRepository.deleteById(taskDTO.getId());
+    }
 
+    @Override
+    public void deleteAllTasks() {
+        taskRepository.deleteAll();
+    }
 
     private SubTaskDTO subTaskConverter(SubTask subTask){
         SubTaskDTO subTaskDTO = new SubTaskDTO();
