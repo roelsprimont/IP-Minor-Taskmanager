@@ -1,32 +1,40 @@
-package ucll.be.taskmanager.domain;
+package ucll.be.taskmanager.model.domain;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
+@Table(name = "task")
 public class Task  {
-    private final static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM d u 'at' h a");
+    @Id
+    @GeneratedValue
+    private long id;
+
     private String title;
+
     private String description;
+
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime date;
-    private long id;
+
+    @OneToMany(mappedBy = "task", fetch= FetchType.EAGER, cascade = CascadeType.ALL)
     private List<SubTask> subTasks;
 
-    public Task(){}
+    private final static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM d u 'at' h a");
 
-    public Task(long id, String title, LocalDateTime date){
+    public Task(){subTasks = new ArrayList<>();}
+
+    public Task(long id, String title, LocalDateTime date,String description){
         setId(id);
         setTitle(title);
         setDate(date);
-        setDescription("No description");
-        subTasks = new ArrayList<>();
-    }
-
-    public Task(long id, String title, LocalDateTime date,String description){
-        this(id,title,date);
         setDescription(description);
         subTasks = new ArrayList<>();
     }

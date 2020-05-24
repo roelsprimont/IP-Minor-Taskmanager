@@ -1,3 +1,5 @@
+target/*
+HELP.md
 
 # Created by https://www.gitignore.io/api/java,intellij
 # Edit at https://www.gitignore.io/?templates=java,intellij

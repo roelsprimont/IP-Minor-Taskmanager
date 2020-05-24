@@ -16,6 +16,7 @@
 </nav>
 <h1 th:text="'Add a subtask to: ' + ${task.getTitle()}"></h1>
 <form method="POST" th:action="'/tasks/newSubTask/' + ${task.getId()}">
+    <p th:text="${#fields.globalErrors()}"></p>
     <div class="form-group">
         <label for="title">Title</label>
         <input type="text" name="title" placeholder="Title">
