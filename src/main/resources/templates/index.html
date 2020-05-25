@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
 <head>
     <meta charset="UTF-8">
     <title>Taskmanager</title>
@@ -7,17 +7,11 @@
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
 <body class="container">
-<nav class="navbar navbar-light bg-light">
-    <a class="navbar-brand" href="/">Taskmanager</a>
-    <ul class="nav navbar">
-        <li class="nav-item"><a class="nav-link" href="/tasks">Tasks</a></li>
-        <li class="nav-item"><a class="nav-link" href="/tasks/new">New task</a></li>
-    </ul>
-</nav>
+<div th:replace="fragments/header"></div>
 <main>
     <h1>Taskmanager</h1>
-    <p>Welcome to your taskmanager!</p>
-    <a href="/tasks"><button class="btn btn-success">Click here to see your tasks!</button></a>
+    <p th:text="#{welcome}"></p>
+    <a href="/tasks"><button class="btn btn-success" th:text="#{task_button}"></button></a>
 </main>
 
 

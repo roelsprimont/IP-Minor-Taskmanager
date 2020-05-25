@@ -14,23 +14,22 @@
         <li class="nav-item active"><a class="nav-link" href="/tasks/new">New task</a></li>
     </ul>
 </nav>
-<h1>Add a task</h1>
+<h1 th:text="#{add_task}"></h1>
 <form method="POST" action="/tasks/newTask">
-    <p th:text="${#fields.globalErrors()}"></p>
     <div class="form-group">
-        <label for="title">Title</label>
-        <input type="text" name="title" placeholder="Title">
+        <label for="title" th:text="#{title}"></label>
+        <input type="text" name="title" th:placeholder="#{title}">
     </div>
     <div class="form-group">
-        <label for="description">Description</label>
-        <input type="text" name="description" placeholder="Description">
+        <label for="description" th:text="#{description}"></label>
+        <input type="text" name="description" th:placeholder="#{description}">
     </div>
     <div class="form-group">
-        <label for="date">Date</label>
+        <label for="date" th:text="#{date}"></label>
         <input type="datetime-local" name="date">
 
     </div>
-    <input type="submit" class="btn btn-primary" value="Submit">
+    <input type="submit" class="btn btn-primary" th:value="#{submit}">
 </form>
 </body>
 </html>

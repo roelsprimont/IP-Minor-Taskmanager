@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
 <head>
     <meta charset="UTF-8">
     <title>Taskmanager</title>
@@ -7,30 +7,24 @@
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
 <body class="container">
-<nav class="navbar navbar-light bg-light">
-    <a class="navbar-brand" href="/">Taskmanager</a>
-    <ul class="nav navbar">
-        <li class="nav-item"><a class="nav-link" href="/tasks">Tasks</a></li>
-        <li class="nav-item"><a class="nav-link" href="/tasks/new">New task</a></li>
-    </ul>
-</nav>
-<h1>Task detail</h1>
+<div th:replace="fragments/header"></div>
+<h1 th:text="#{task_detail}"></h1>
 <div th:switch="${task}">
-    <h3 th:case="null">No task found with this id</h3>
+    <h3 th:case="null" th:text="#{task_not_found}"></h3>
     <div th:case="*">
 
-        <h3 th:text="'Task: ' + ${task.title}"></h3>
-        <h3 th:text="'Description: ' + ${task.description}"></h3>
-        <h3 th:text="'Due date: ' + ${task.date}"></h3>
+        <h3 th:text="#{task} + ': ' + ${task.title}"></h3>
+        <h3 th:text="#{description}+': ' + ${task.description}"></h3>
+        <h3 th:text="#{date}+': ' + ${task.date}"></h3>
         <div th:switch="${subtasks.size()}">
-            <p th:case="0">No subtasks found</p>
+            <p th:case="0" th:text="#{no_subtasks_found}"></p>
             <table class="table" th:case="*">
-                <h3>Subtasks</h3>
+                <h3 th:text="#{subtasks}"></h3>
                 <thead>
                 <tr>
-                    <th scope="col">Title</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Date</th>
+                    <th scope="col" th:text="#{title}"></th>
+                    <th scope="col" th:text="#{description}"></th>
+                    <th scope="col" th:text="#{date}"></th>
 
                 </tr>
                 </thead>
@@ -44,7 +38,7 @@
                 </tbody>
             </table>
         </div>
-        <a class="btn btn-success" th:href="'/tasks/' + ${task.id} + '/sub/create'" role="button">New Subtask</a>
+        <a class="btn btn-success" th:href="'/tasks/' + ${task.id} + '/sub/create'" role="button" th:text="#{new_subtask}"></a>
     </div>
 </div>
 </body>
